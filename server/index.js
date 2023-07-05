@@ -17,10 +17,10 @@ app.get('/',(req, res) =>{
 app.use('/user',userRoutes)
 
 
-const CONNECTION_URL = "mongodb+srv://ysahu2539:Ysahu1324@stack-overflow-clone.w2rniqc.mongodb.net/?retryWrites=true&w=majority"
+const CONNECTION_URL = "mongodb://localhost:27017/BAI-SERVER"
 mongoose.connect(CONNECTION_URL, {useNewUrlParser:true , useUnifiedTopology:true})
 .then(() => app.listen(PORT, () => {console.log(`server is running on PORT ${PORT}`)}))
-.catch((err) => console.log(err.message))
+.catch((err) => console.log(err.message)) 
 
 
 const PORT = process.env.PORT || 5000
