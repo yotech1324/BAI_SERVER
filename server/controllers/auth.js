@@ -24,6 +24,7 @@ res.status(200).json({ result:newUser, token})
 // for login 
 export const login = async(req, res) => { 
      const {email , password} = req.body;
+     
      try{
 const existinguser = await users.findOne({ email });
 if(!existinguser){
@@ -35,12 +36,11 @@ const isPasswordCrt = await bcrypt.compare(password , existinguser.password)
             return res.status(400).json({message : "Invalid credentials"})
         }
 
-        const token = jwt.sign({ email: newUser.email , id: newUser._id} , "test", {expiresIn:'1h'});
-        res.status(200).json({ result:newUser, token})           
+        const token = jwt.sign({ email: existinguser.email , id: existinguser._id} , "test", {expiresIn:'1h'});
+        res.status(200).json({ result:existinguser, token})           
 
      } catch(error) {
 res.status(500).json({message : "Something went wrong..."});
-
 
      }
 }
